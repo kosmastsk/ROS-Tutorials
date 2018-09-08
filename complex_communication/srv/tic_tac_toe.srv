@@ -1,0 +1,4 @@
+board table
+uint8 player
+---
+uint8 move
