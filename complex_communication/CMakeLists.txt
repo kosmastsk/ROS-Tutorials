@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  message_generation   # Add message_generation here, after the other packages
 )
 
 ## System dependencies are found with CMake's conventions
@@ -47,18 +48,18 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
+ add_message_files(
+   FILES
+   board.msg
 #   Message2.msg
-# )
+ )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
+ add_service_files(
+   FILES
+   tic_tac_toe.srv
 #   Service2.srv
-# )
+ )
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -68,10 +69,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-# )
+ generate_messages(
+   DEPENDENCIES
+   std_msgs
+ )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -105,7 +106,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES complex_communication
-#  CATKIN_DEPENDS roscpp rospy std_msgs
+  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
 
@@ -133,7 +134,17 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/complex_communication_node.cpp)
+add_executable(server src/server.cpp)
+target_link_libraries(server ${catkin_LIBRARIES})
+add_dependencies(server complex_communication_gencpp)
+
+add_executable(player_1 src/player_1.cpp)
+target_link_libraries(player_1 ${catkin_LIBRARIES})
+add_dependencies(player_1 complex_communication_gencpp)
+
+add_executable(player_2 src/player_2.cpp)
+target_link_libraries(player_2 ${catkin_LIBRARIES})
+add_dependencies(player_2 complex_communication_gencpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the

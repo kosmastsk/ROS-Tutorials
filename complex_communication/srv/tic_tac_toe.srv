@@ -1,4 +1,4 @@
-board table
+uint8 move
 uint8 player
 ---
-uint8 move
+uint8[9] table
