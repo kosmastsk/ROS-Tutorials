@@ -72,7 +72,7 @@ void executeCB(const complex_communication_actions::tictactoeGoalConstPtr &goal)
         bool success = true;
 
         // start executing the action
-        while (can_play[goal->player-1] == 1) {                 // Check if is my turn to play
+        while (can_play[goal->player-1] == 1) {   // Check if is my turn to play
 
                 // check that preempt has not been requested by the client
                 if (as_.isPreemptRequested() || !ros::ok())
@@ -116,31 +116,33 @@ void executeCB(const complex_communication_actions::tictactoeGoalConstPtr &goal)
                         for (int i = 0; i < 9; i++) {
                                 feedback_.current_table[i] = board[i];
                         }
-
                         // publish the feedback
                         as_.publishFeedback(feedback_);
 
                         // this sleep is not necessary, the sequence is computed at 1 Hz for demonstration purposes
                         r.sleep();
                 }
-                if(success)
-                {
-                        result_.final_table = feedback_.current_table;
-                        ROS_INFO("%s: Succeeded", tictactoe_action_.c_str());
-                        // set the action state to succeeded
-                        as_.setSucceeded(result_);
+
+                if (game_finished(board, goal->player)) {
+                        success = 1;
+                        ROS_INFO("We have a winner! Player #%d\n", goal->player);
+                        print(board);
+                        exit(1);
+                }
+                else if (plays == 9) {
+                        success = 1;
+                        ROS_INFO("We have a draw!\n");
+                        print(board);
+                        exit(1);
                 }
         }
 
-        if (game_finished(board, goal->player)) {
-                ROS_INFO("We have a winner! Player #%d\n", goal->player);
-                print(board);
-                ros::shutdown();
-        }
-        else if (plays == 9) {
-                ROS_INFO("We have a draw!\n");
-                print(board);
-                ros::shutdown();
+        if(success)
+        {
+                result_.final_table = feedback_.current_table;
+                ROS_INFO("%s: Succeeded", tictactoe_action_.c_str());
+                // set the action state to succeeded
+                as_.setSucceeded(result_);
         }
 }
 };
