@@ -1,0 +1,11 @@
+<launch>
+  <!-- the server node -->
+  <node name="server" pkg="complex_communication_actions" type="server" output="screen" required="true"/>
+
+  <!-- First player of the game -->
+  <node name="player1" pkg="complex_communication_actions" type="player_1" output="screen" />
+
+  <!-- First player of the game -->
+  <node name="player2" pkg="complex_communication_actions" type="player_2" output="screen" />
+
+</launch>

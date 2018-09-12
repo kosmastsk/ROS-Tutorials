@@ -1,0 +1,9 @@
+#goal definition
+int8 move
+int8 player
+---
+#result definition
+int8[9] final_table
+---
+#feedback
+int8[9] current_table
