@@ -1,0 +1,8 @@
+# Define the goal - empty
+uint32 empty_goal
+---
+# Define the result - two coordinates
+uint32 x
+uint32 y
+---
+# Define a feedback message - empty

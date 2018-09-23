@@ -1,0 +1,14 @@
+<launch>
+  <!-- 1st node -->
+  <node name="thermal_sensor" pkg="simple_robot" type="thermal_sensor" output="screen"/>
+
+<!-- 2nd node -->
+  <node name="data_fusion" pkg="simple_robot" type="data_fusion" output="screen" />
+
+  <!-- 3rd node -->
+    <node name="robotPoseServer" pkg="simple_robot" type="robotPoseServer" output="screen" />
+
+    <!-- 4th node -->
+      <node name="getRobotPoseClient" pkg="simple_robot" type="getRobotPoseClient" output="screen" />
+
+</launch>
