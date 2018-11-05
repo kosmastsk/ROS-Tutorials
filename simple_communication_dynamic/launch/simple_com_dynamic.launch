@@ -1,0 +1,13 @@
+<!--Simple communication task with dynamic parameters -->
+<launch>
+  <!-- cfg-reconfigure for changing the dynamic params -->
+  <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure"/>
+
+  <node name="streamer" pkg="simple_communication_dynamic" type="streamer" output="screen">
+    <!-- Set the publishing frequency as a static parameter -->
+    <rosparam file="$(find simple_communication_dynamic)/config/params.yaml" command="load"/>
+  </node>
+
+  <node name="manipulator" pkg="simple_communication_dynamic" type="manipulator" output="screen"/>
+
+</launch>
