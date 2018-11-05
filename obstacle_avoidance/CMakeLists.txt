@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
   geometry_msgs
   sensor_msgs
   nav_msgs
+  visualization_msgs
 )
 
 set(CMAKE_BUILD_TYPE Release)
@@ -40,6 +41,12 @@ add_dependencies(stdr_obstacle_avoidance ${stdr_msgs_EXPORTED_TARGETS}) # wait f
 target_link_libraries(stdr_obstacle_avoidance
   ${catkin_LIBRARIES}
 )
+
+add_executable(robot_pose_listener src/obstacle_avoidance/listener.cpp)
+target_link_libraries(robot_pose_listener ${catkin_LIBRARIES})
+
+add_executable(bounding_box src/obstacle_avoidance/boundingBox.cpp)
+target_link_libraries(bounding_box ${catkin_LIBRARIES})
 
 # Install excecutables
 install(TARGETS stdr_obstacle_avoidance

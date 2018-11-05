@@ -12,11 +12,11 @@
    You should have received a copy of the GNU General Public License
    along with this program; if not, write to the Free Software Foundation,
    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
-   
-   Authors : 
+
+   Authors :
    * Manos Tsardoulias, etsardou@gmail.com
    * Aris Thallas, aris.thallas@gmail.com
-   * Chris Zalidis, zalidis@gmail.com 
+   * Chris Zalidis, zalidis@gmail.com
 ******************************************************************************/
 #ifndef STDR_OBSTACLE_AVOIDANCE_SAMPLE
 #define STDR_OBSTACLE_AVOIDANCE_SAMPLE
@@ -35,41 +35,42 @@
 #include <geometry_msgs/Twist.h>
 #include <sensor_msgs/LaserScan.h>
 #include <sensor_msgs/Range.h>
+#include <tf/transform_listener.h>
 
 /**
 @namespace stdr_samples
 @brief The main namespace for STDR Samples
-**/ 
+**/
 namespace stdr_samples
 {
   /**
   @class ObstacleAvoidance
   @brief Performs obstacle avoidance to a single robot
-  **/ 
+  **/
   class ObstacleAvoidance
   {
     private:
-      
+
       //!< The ros laser scan msg
       sensor_msgs::LaserScan scan_;
-      
+
       //!< Subscriber for the ros laser msg
       ros::Subscriber subscriber_;
-      
+
       //!< The ROS node handle
       ros::NodeHandle n_;
-      
+
       //!< The laser topic
       std::string laser_topic_;
-      
+
       //!< The speeds topic
       std::string speeds_topic_;
-      
+
       //!< The twist publisher
       ros::Publisher cmd_vel_pub_;
-      
+
     public:
-    
+
       /**
       @brief Default contructor
       @param argc [int] Number of input arguments
@@ -77,20 +78,20 @@ namespace stdr_samples
       @return void
       **/
       ObstacleAvoidance(int argc,char **argv);
-      
+
       /**
       @brief Default destructor
       @return void
       **/
       ~ObstacleAvoidance(void);
-      
+
       /**
       @brief Callback for the ros laser message
       @param msg [const sensor_msgs::LaserScan&] The new laser scan message
       @return void
       **/
       void callback(const sensor_msgs::LaserScan& msg);
-      
+
   };
 }
 

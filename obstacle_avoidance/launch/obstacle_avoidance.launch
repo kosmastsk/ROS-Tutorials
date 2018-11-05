@@ -10,4 +10,8 @@
 
   <node pkg="obstacle_avoidance" type="stdr_obstacle_avoidance" name="stdr_obstacle_avoidance" args="robot0 laser_0"/>
 
+  <node pkg="obstacle_avoidance" type="bounding_box" name="bounding_box"/>
+
+  <node pkg="obstacle_avoidance" type="robot_pose_listener" name="robot_pose_listener"/>
+
 </launch>
