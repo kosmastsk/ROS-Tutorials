@@ -1,0 +1,17 @@
+<launch>
+
+<!-- Launch the gazebo simulator -->
+  <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch" />
+
+  <!-- Launch Rviz -->
+  <include file="$(find stdr_launchers)/launch/rviz.launch" />
+
+  <!-- Launch the CRSM SLAM launch file -->
+  <include file="$(find crsm_slam)/launch/crsm_slam_simulation.launch" />
+
+ <!-- Include the turtlebot_teleop launch file, for moving the mobile base with keyboard -->
+  <include file="$(find turtlebot_teleop)/launch/keyboard_teleop.launch" />
+  <!-- Change the velocity topic so that it matches to the one in gazebo mobile_base -->
+  <remap from="cmd_vel_mux/input/teleop" to="/mobile_base/commands/velocity" />
+
+</launch>

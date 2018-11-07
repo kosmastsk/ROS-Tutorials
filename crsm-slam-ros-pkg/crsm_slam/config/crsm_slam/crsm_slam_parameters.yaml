@@ -2,7 +2,7 @@
 occupancy_grid_publish_topic : /slam/occupancyGridMap
 robot_trajectory_publish_topic : /robot_trajectory
 trajectory_publisher_frame_id : map
-laser_subscriber_topic : /robot0/laser_0
+laser_subscriber_topic : /scan
 pose_publish_topic: /pose
 publish_tf: true
 

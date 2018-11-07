@@ -1,0 +1,20 @@
+<launch>
+
+    <!-- Launch the gazebo simulator -->
+    <!-- Make the world name a parameter -->
+    <arg name="world" default="corridor"/>
+
+    <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
+    <arg name="world_file" value="$(find turtlebot_gazebo)/worlds/$(arg world).world"/>
+  </include>
+
+    <!-- Launch Rviz -->
+    <include file="$(find stdr_launchers)/launch/rviz.launch" />
+
+    <!-- Launch the CRSM SLAM launch file -->
+    <include file="$(find crsm_slam)/launch/crsm_slam_simulation.launch" />
+
+    <!-- Launch the obstacle avoidance node with the rights args. In gazebo the robot is mobile_base and gets the laser input in /scan-->
+    <node pkg="gazebo_obstacle_avoidance" type="stdr_obstacle_avoidance" name="stdr_obstacle_avoidance" args="mobile_base scan"/>
+
+</launch>

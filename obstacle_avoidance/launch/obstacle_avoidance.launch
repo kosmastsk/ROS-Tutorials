@@ -1,5 +1,7 @@
 <launch>
 
+  <remap from="/robot0/laser_0" to="/laser/scan"/>
+
   <!-- Launch the STDR simulator -->
   <include file="$(find stdr_launchers)/launch/server_with_map_and_gui_plus_robot.launch" />
 
@@ -7,6 +9,9 @@
   <include file="$(find stdr_launchers)/launch/rviz.launch" />
 
   <!-- <include file="$(stdr_simulator)/move_base/2dnav_pr2.launch" /> -->
+
+<!--  <node pkg="obstacle_avoidance" type="stdr_obstacle_avoidance" name="stdr_obstacle_avoidance" args="mobile_base scan"/>
+-->
 
   <node pkg="obstacle_avoidance" type="stdr_obstacle_avoidance" name="stdr_obstacle_avoidance" args="robot0 laser_0"/>
 
